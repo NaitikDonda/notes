@@ -18,6 +18,19 @@
             --shadow-color: rgba(0, 0, 0, 0.4);
         }
         
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-highlight: rgba(0, 0, 0, 0.05);
+            --text-color: rgba(0, 0, 0, 0.9);
+            --text-secondary: rgba(0, 0, 0, 0.7);
+            --accent-blue: #0066cc;
+            --accent-purple: #8a2be2;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: var(--bg-color);
@@ -28,12 +41,20 @@
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(77, 171, 255, 0.1), transparent 60%),
                 radial-gradient(circle at 80% 70%, rgba(191, 90, 242, 0.1), transparent 60%);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        [data-theme="light"] body {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 102, 204, 0.05), transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.05), transparent 60%);
         }
         
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
         }
         
         /* Header with Glass Effect */
@@ -85,6 +106,42 @@
             font-size: 1.1rem;
             position: relative;
             z-index: 2;
+        }
+        
+        /* Sticky Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(30deg);
+            box-shadow: 0 6px 25px var(--shadow-color);
+        }
+        
+        .theme-toggle i {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover i {
+            transform: scale(1.1);
         }
         
         /* Glass Cards with Stats Overlay */
@@ -240,7 +297,6 @@
             margin: 50px 0;
         }
         
-        
         /* Footer */
         .footer {
             text-align: center;
@@ -258,6 +314,73 @@
         .footer p {
             margin: 5px 0;
         }
+        
+        /* Social Icons Styles */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(77, 171, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .social-icons a {
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .social-icons a:hover {
+            background: rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Platform-specific hover effects */
+.social-icons a:nth-child(1):hover { /* Instagram */
+    color: white;
+    background: linear-gradient(45deg,
+        rgba(240,148,51,0.8),
+        rgba(230,104,60,0.8),
+        rgba(220,39,67,0.8),
+        rgba(204,35,102,0.8),
+        rgba(188,24,136,0.8)
+    );
+}
+
+
+.social-icons a:nth-child(2):hover { /* LinkedIn */
+    color: white;
+    background: linear-gradient(45deg,
+        rgba(0, 119, 181, 0.8),
+        rgba(0, 160, 220, 0.8)
+    );
+}
+
+
+
+.social-icons a:nth-child(3):hover { /* Gmail */
+    color: white;
+    background: linear-gradient(45deg, 
+        rgba(66, 133, 244, 0.8), 
+        rgba(234, 67, 53, 0.8), 
+        rgba(251, 188, 5, 0.8), 
+        rgba(52, 168, 83, 0.8)
+    );
+}
+
+
         
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -285,55 +408,156 @@
                 right: 10px;
                 padding: 6px 10px;
             }
-
-            /* Social Icons Styles - Add this with your other footer styles */
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin: 20px 0;
-    padding: 10px;
-    background: rgba(77, 171, 255, 0.08);
-    backdrop-filter: blur(5px);
-    border-radius: 50px;
-    border: 1px solid var(--glass-border);
-}
-
-.social-icons a {
-    color: var(--text-secondary);
-    font-size: 1.4rem;
-    transition: all 0.3s ease;
-    padding: 8px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-
-.social-icons a:hover {
-    background: rgba(254, 255, 255, 0.15);
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-}
-
-/* Platform-specific hover effects */
-.social-icons a:nth-child(1):hover { /* Instagram */
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.social-icons a:nth-child(2):hover { /* LinkedIn */
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.social-icons a:nth-child(3):hover { /* Gmail */
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-}
+            
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .theme-toggle i {
+                font-size: 1.5rem;
+            }
         }
+     .feedback-container {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.star {
+    color: var(--text-secondary); /* dynamic color based on theme */
+    transition: color 0.3s, transform 0.2s, text-shadow 0.3s;   
+    font-size: 35px;  /* increased from 2rem to 4rem */
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.star:hover {
+    color: var(--accent-blue);
+    transform: scale(1.2);
+    text-shadow: 0 0 8px var(--accent-blue);
+}
+
+.star.selected {
+    color: var(--accent-blue);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    color: var(--text-color);
+    resize: none;
+    margin-bottom: 10px;
+}
+
+/* Default: Dark Mode Button */
+button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: rgba(51, 153, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Shiny glass hover effect */
+button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: rotate(25deg);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 1;
+}
+
+button:hover::before {
+  opacity: 1;
+  animation: shine 1.2s linear forwards;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(25deg);
+  }
+}
+
+button:hover {
+  background: rgba(51, 153, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(51, 153, 255, 0.5);
+}
+
+/* Light Mode Styles */
+[data-theme="light"] button {
+  background: rgba(196, 196, 196, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgb(0, 0, 0);
+}
+
+[data-theme="light"] button:hover {
+  background: rgba(255, 252, 252, 0.9);
+  color: black;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] button::before {
+  background: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.2)
+  );
+}
+
+:root {
+    --text-color: rgba(255, 255, 255, 0.9);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --glass-bg: rgba(30, 30, 46, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --accent-blue: #4dabff;
+}
+
+[data-theme="light"] {
+    --text-color: rgba(0, 0, 0, 0.9);
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.15);
+    --accent-blue: #0066cc;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -343,9 +567,12 @@
             <p class="author">Prepared by <strong>~Naitik Donda</strong></p>
         </header>
         
-         
-
+        <!-- Sticky Theme Toggle Button -->
+        <div class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </div>
         
+        <!-- Rest of your content remains the same -->
         <section class="section">
             <h2 class="section-title">"Management 22509 </h2>
       
@@ -585,12 +812,21 @@
             </div>
         </section>
         <div class="divider"></div>
-        <!-- Add this before your footer -->
-<!-- Add this HTML in your existing code where you want the rating system -->
+          <div class="feedback-container">
+  <h2>Give Your Feedback</h2>
+  <div class="stars">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+  </div>
+  <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
+  <button onclick="submitFeedback()">Submit Feedback</button>
+</div>
 
-    
-        
-        
+
+
         <footer class="footer">
             <p>MGT & ETI Study Materials</p>
             
@@ -607,13 +843,68 @@
                 </a>
             </div>
             
-            <p>© 2025 MGT & ETI Study Materials. All rights reserved.</p>
+            <p>© 2025 Naitik Donda. All rights reserved.</p>
         </footer>
         
-        <!-- Add this to your head section -->
+        <!-- Font Awesome for icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
        
-   
-        
+        <!-- JavaScript for theme toggle -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const themeToggle = document.getElementById('themeToggle');
+                const icon = themeToggle.querySelector('i');
+                
+                // Check for saved theme preference or use preferred color scheme
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+                
+                // Toggle theme on button click
+                themeToggle.addEventListener('click', function() {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    
+                    if (currentTheme === 'light') {
+                        document.documentElement.removeAttribute('data-theme');
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+            });
+        </script>
+    <script>
+  let selectedRating = 0;
+
+  document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', function () {
+      selectedRating = this.getAttribute('data-value');
+      document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+      for (let i = 0; i < selectedRating; i++) {
+        document.querySelectorAll('.star')[i].classList.add('selected');
+      }
+    });
+  });
+
+  function submitFeedback() {
+    const text = document.getElementById('feedbackText').value;
+    const mailBody = `Rating: ${selectedRating} Stars\nFeedback: ${text}`;
+
+    window.location.href = `mailto:your-email@example.com?subject=Feedback&body=${encodeURIComponent(mailBody)}`;
+  }
+</script>
+
+
+    </div>
 </body>
 </html>
